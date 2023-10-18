@@ -11,7 +11,7 @@
 
         public TransformMatrix ComputeMatrix()
         {
-            return new (
+            return new TransformMatrix(
                 1f, 
                 0f, 
                 0f,

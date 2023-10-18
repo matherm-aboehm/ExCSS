@@ -7,7 +7,7 @@ namespace ExCSS
     public static class Colors
     {
         private static readonly Dictionary<string, Color> NamedColors =
-            new (StringComparer.OrdinalIgnoreCase)
+            new Dictionary<string, Color>(StringComparer.OrdinalIgnoreCase)
             {
                 {"aliceblue", new Color(240, 248, 255)},
                 {"antiquewhite", new Color(250, 235, 215)},

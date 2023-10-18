@@ -18,12 +18,11 @@ namespace ExCSS
         {
             var a = Step.ToString();
 
-            var b = Offset switch
-            {
-                > 0 => "+" + Offset,
-                < 0 => Offset.ToString(),
-                _ => string.Empty
-            };
+            var b = string.Empty;
+            if (Offset > 0)
+                b = "+" + Offset;
+            else if (Offset < 0)
+                b = Offset.ToString();
 
             writer.Write(":{0}({1}n{2})", _name, a, b);
         }

@@ -4,7 +4,7 @@ namespace ExCSS
 {
     public struct Time : IEquatable<Time>, IComparable<Time>, IFormattable
     {
-        public static readonly Time Zero = new(0f, Unit.Ms);
+        public static readonly Time Zero = new Time(0f, Unit.Ms);
 
         public Time(float value, Unit unit)
         {
@@ -19,12 +19,12 @@ namespace ExCSS
         {
             get
             {
-                return Type switch
+                switch (Type)
                 {
-                    Unit.Ms => UnitNames.Ms,
-                    Unit.S => UnitNames.S,
-                    _ => string.Empty
-                };
+                    case Unit.Ms: return UnitNames.Ms;
+                    case Unit.S: return UnitNames.S;
+                    default: return string.Empty;
+                }
             }
         }
 
@@ -67,7 +67,7 @@ namespace ExCSS
             return ToMilliseconds().CompareTo(other.ToMilliseconds());
         }
 
-       
+
         public static Unit GetUnit(string s)
         {
             switch (s)

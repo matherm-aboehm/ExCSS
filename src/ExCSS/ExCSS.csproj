@@ -1,8 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<LangVersion>9.0</LangVersion>
-		<TargetFrameworks>net7.0;net6.0;netcoreapp3.1;net48;netstandard2.1;netstandard2.0</TargetFrameworks>
+		<LangVersion>latest</LangVersion>
+		<TargetFrameworks>net48;netstandard2.0</TargetFrameworks>
+		<TargetFrameworks Condition="'$(VisualStudioVersion)' &gt;= '16.0'">net7.0;net6.0;netcoreapp3.1;netstandard2.1;$(TargetFrameworks)</TargetFrameworks>
 		<AssemblyName>ExCSS</AssemblyName>
 		<PackageId>ExCSS</PackageId>
 		<Title>ExCSS .NET Stylesheet Parser</Title>
@@ -12,15 +13,19 @@
 			ExCSS makes it easy to read and parse stylesheets into a friendly object model with full LINQ support.
 		</Description>
 		<PackageProjectUrl>https://github.com/TylerBrinks/ExCSS</PackageProjectUrl>
-        <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <PackageReadmeFile>readme.md</PackageReadmeFile>
-        <RespositoryType>git</RespositoryType>
-        <RepositoryUrl>https://github.com/TylerBrinks/ExCSS</RepositoryUrl>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageReadmeFile>readme.md</PackageReadmeFile>
+		<RespositoryType>git</RespositoryType>
+		<RepositoryUrl>https://github.com/TylerBrinks/ExCSS</RepositoryUrl>
 		<GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
 		<GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
 		<GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
 		<SignAssembly>true</SignAssembly>
 		<AssemblyOriginatorKeyFile>ExCSS.snk</AssemblyOriginatorKeyFile>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(TargetFramework)' != ''">
+		<LangVersion>latest</LangVersion>
 	</PropertyGroup>
 
 	<ItemGroup>

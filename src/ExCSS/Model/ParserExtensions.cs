@@ -6,7 +6,7 @@ namespace ExCSS
     internal static class ParserExtensions
     {
         private static readonly Dictionary<string, Func<string, DocumentFunction>> FunctionTypes =
-            new(StringComparer.OrdinalIgnoreCase)
+            new Dictionary<string, Func<string, DocumentFunction>>(StringComparer.OrdinalIgnoreCase)
             {
                 {FunctionNames.Url, url => new UrlFunction(url)},
                 {FunctionNames.Domain, url => new DomainFunction(url)},
@@ -15,7 +15,7 @@ namespace ExCSS
 
         private static readonly Dictionary<string, Func<IEnumerable<IConditionFunction>, IConditionFunction>>
             GroupCreators =
-                new(
+                new Dictionary<string, Func<IEnumerable<IConditionFunction>, IConditionFunction>>(
                     StringComparer.OrdinalIgnoreCase)
                 {
                     {Keywords.And, CreateAndCondition},

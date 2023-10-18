@@ -22,7 +22,7 @@ namespace ExCSS
 
         public TokenValue GetResult()
         {
-            return new(_values);
+            return new TokenValue(_values);
         }
 
         public void Apply(Token token)

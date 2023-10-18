@@ -39,7 +39,7 @@ namespace ExCSS
 
         public TextPosition GetCurrentPosition()
         {
-            return new(Line, Column, Position);
+            return new TextPosition(Line, Column, Position);
         }
 
         //protected bool ContinuesWithInsensitive(string val)

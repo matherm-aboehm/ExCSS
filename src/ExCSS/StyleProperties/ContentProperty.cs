@@ -14,7 +14,7 @@ namespace ExCSS
         internal override IValueConverter Converter => StyleConverter;
 
         private static readonly Dictionary<string, ContentMode> ContentModes =
-            new(StringComparer.OrdinalIgnoreCase)
+            new Dictionary<string, ContentMode>(StringComparer.OrdinalIgnoreCase)
             {
                 {Keywords.OpenQuote, new OpenQuoteContentMode()},
                 {Keywords.NoOpenQuote, new NoOpenQuoteContentMode()},

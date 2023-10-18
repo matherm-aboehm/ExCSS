@@ -10,7 +10,7 @@ namespace ExCSS
 {
     public class StylesheetParser
     {
-        internal static readonly StylesheetParser Default = new();
+        internal static readonly StylesheetParser Default = new StylesheetParser();
 
         public StylesheetParser(
             bool includeUnknownRules = false,

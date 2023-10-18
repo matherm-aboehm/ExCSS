@@ -4,7 +4,7 @@ namespace ExCSS
 {
     internal static class PortNumbers
     {
-        private static readonly Dictionary<string, string> Ports = new()
+        private static readonly Dictionary<string, string> Ports = new Dictionary<string, string>()
         {
             {ProtocolNames.Http, "80"},
             {ProtocolNames.Https, "443"},

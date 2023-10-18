@@ -5,9 +5,9 @@ namespace ExCSS
 {
     public sealed class AttributeSelectorFactory
     {
-        private static readonly Lazy<AttributeSelectorFactory> Lazy = new(() => new AttributeSelectorFactory());
+        private static readonly Lazy<AttributeSelectorFactory> Lazy = new Lazy<AttributeSelectorFactory>(() => new AttributeSelectorFactory());
 
-        private readonly Dictionary<string, Type> _types = new()
+        private readonly Dictionary<string, Type> _types = new Dictionary<string, Type>()
         {
             { Combinators.Exactly, typeof(AttrMatchSelector) },
             { Combinators.InList, typeof(AttrListSelector) },

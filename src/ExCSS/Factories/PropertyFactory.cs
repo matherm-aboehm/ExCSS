@@ -6,17 +6,17 @@ namespace ExCSS
 {
     internal sealed class PropertyFactory
     {
-        private static readonly Lazy<PropertyFactory> Lazy = new(() => new PropertyFactory());
+        private static readonly Lazy<PropertyFactory> Lazy = new Lazy<PropertyFactory>(() => new PropertyFactory());
 
-        private readonly List<string> _animatables = new();
+        private readonly List<string> _animatables = new List<string>();
 
-        private readonly Dictionary<string, LonghandCreator> _fonts = new(StringComparer.OrdinalIgnoreCase);
+        private readonly Dictionary<string, LonghandCreator> _fonts = new Dictionary<string, LonghandCreator>(StringComparer.OrdinalIgnoreCase);
 
-        private readonly Dictionary<string, LonghandCreator> _longhands = new(StringComparer.OrdinalIgnoreCase);
+        private readonly Dictionary<string, LonghandCreator> _longhands = new Dictionary<string, LonghandCreator>(StringComparer.OrdinalIgnoreCase);
 
-        private readonly Dictionary<string, string[]> _mappings = new();
+        private readonly Dictionary<string, string[]> _mappings = new Dictionary<string, string[]>();
 
-        private readonly Dictionary<string, ShorthandCreator> _shorthands = new(StringComparer.OrdinalIgnoreCase);
+        private readonly Dictionary<string, ShorthandCreator> _shorthands = new Dictionary<string, ShorthandCreator>(StringComparer.OrdinalIgnoreCase);
 
         private PropertyFactory()
         {
@@ -190,7 +190,7 @@ namespace ExCSS
             AddLonghand(PropertyNames.FlexBasis, () => new FlexBasisProperty(), true);
             AddLonghand(PropertyNames.FlexDirection, () => new FlexDirectionProperty());
             AddShorthand(PropertyNames.FlexFlow, () => new FlexFlowProperty(),
-                PropertyNames.FlexDirection, 
+                PropertyNames.FlexDirection,
                 PropertyNames.FlexWrap);
             AddLonghand(PropertyNames.FlexGrow, () => new FlexGrowProperty());
             AddLonghand(PropertyNames.FlexShrink, () => new FlexShrinkProperty());
@@ -214,13 +214,13 @@ namespace ExCSS
             AddLonghand(PropertyNames.FontStretch, () => new FontStretchProperty(), true, true);
 
             AddShorthand(PropertyNames.Gap, () => new GapProperty(),
-                PropertyNames.RowGap, 
+                PropertyNames.RowGap,
                 PropertyNames.ColumnGap);
 
             AddLonghand(PropertyNames.Height, () => new HeightProperty(), true);
-            
+
             AddLonghand(PropertyNames.JustifyContent, () => new JustifyContentProperty());
-            
+
             AddLonghand(PropertyNames.Left, () => new LeftProperty(), true);
             AddLonghand(PropertyNames.LetterSpacing, () => new LetterSpacingProperty());
             AddLonghand(PropertyNames.LineHeight, () => new LineHeightProperty(), true);

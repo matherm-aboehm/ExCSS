@@ -7,7 +7,7 @@ namespace ExCSS
     public sealed class PseudoClassSelectorFactory
     {
         private static readonly Lazy<PseudoClassSelectorFactory> Lazy =
-            new(() =>
+            new Lazy<PseudoClassSelectorFactory>(() =>
                 {
                     var factory = new PseudoClassSelectorFactory();
                     Selectors.Add(PseudoElementNames.Before,

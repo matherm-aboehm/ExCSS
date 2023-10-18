@@ -5,12 +5,12 @@ namespace ExCSS
 {
     internal sealed class MediaFeatureFactory
     {
-        private static readonly Lazy<MediaFeatureFactory> Lazy = new (() => new MediaFeatureFactory());
+        private static readonly Lazy<MediaFeatureFactory> Lazy = new Lazy<MediaFeatureFactory>(() => new MediaFeatureFactory());
 
         #region Creators
 
         private readonly Dictionary<string, Creator> _creators =
-            new (StringComparer.OrdinalIgnoreCase)
+            new Dictionary<string, Creator>(StringComparer.OrdinalIgnoreCase)
             {
                 {FeatureNames.MinWidth, () => new WidthMediaFeature(FeatureNames.MinWidth)},
                 {FeatureNames.MaxWidth, () => new WidthMediaFeature(FeatureNames.MaxWidth)},

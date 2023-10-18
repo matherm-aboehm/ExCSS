@@ -40,7 +40,7 @@ namespace ExCSS
         }
 
         private static readonly Dictionary<string, Func<SelectorConstructor, FunctionState>> PseudoClassFunctions =
-            new(StringComparer.OrdinalIgnoreCase)
+            new Dictionary<string, Func<SelectorConstructor, FunctionState>>(StringComparer.OrdinalIgnoreCase)
             {
                 {PseudoClassNames.NthChild, ctx => new ChildFunctionState<FirstChildSelector>(ctx)},
                 {PseudoClassNames.NthLastChild, ctx => new ChildFunctionState<LastChildSelector>(ctx)},

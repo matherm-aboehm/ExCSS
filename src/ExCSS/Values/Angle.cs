@@ -6,11 +6,11 @@ namespace ExCSS
 {
     public struct Angle : IEquatable<Angle>, IComparable<Angle>, IFormattable
     {
-        public static readonly Angle Zero = new(0f, Unit.Rad);
-        public static readonly Angle HalfQuarter = new(45f, Unit.Deg);
-        public static readonly Angle Quarter = new(90f, Unit.Deg);
-        public static readonly Angle TripleHalfQuarter = new(135f, Unit.Deg);
-        public static readonly Angle Half = new(180f, Unit.Deg);
+        public static readonly Angle Zero = new Angle(0f, Unit.Rad);
+        public static readonly Angle HalfQuarter = new Angle(45f, Unit.Deg);
+        public static readonly Angle Quarter = new Angle(90f, Unit.Deg);
+        public static readonly Angle TripleHalfQuarter = new Angle(135f, Unit.Deg);
+        public static readonly Angle Half = new Angle(180f, Unit.Deg);
 
         public Angle(float value, Unit unit)
         {

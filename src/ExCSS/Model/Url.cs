@@ -13,7 +13,7 @@ namespace ExCSS
         private const string CurrentDirectoryAlternative = "%2e";
         private const string UpperDirectory = "..";
         private static readonly string[] UpperDirectoryAlternatives = {"%2e%2e", ".%2e", "%2e."};
-        private static readonly Url DefaultBase = new(string.Empty, string.Empty, string.Empty);
+        private static readonly Url DefaultBase = new Url(string.Empty, string.Empty, string.Empty);
 
         private string _fragment;
         private string _query;
@@ -25,7 +25,7 @@ namespace ExCSS
 
         public static implicit operator Uri(Url value)
         {
-            return new(value.Serialize(), value.IsRelative ? UriKind.Relative : UriKind.Absolute);
+            return new Uri(value.Serialize(), value.IsRelative ? UriKind.Relative : UriKind.Absolute);
         }
 
         private Url(string scheme, string host, string port)
@@ -64,12 +64,12 @@ namespace ExCSS
 
         public static Url Create(string address)
         {
-            return new(address);
+            return new Url(address);
         }
 
         public static Url Convert(Uri uri)
         {
-            return new(uri.OriginalString);
+            return new Url(uri.OriginalString);
         }
 
         public string Origin

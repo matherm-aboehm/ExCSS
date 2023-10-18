@@ -103,19 +103,21 @@ namespace ExCSS
             string separator,
             bool first = true)
         {
-            using var writer = new StringWriter(sb);
-            foreach (var element in elements)
+            using (var writer = new StringWriter(sb))
             {
-                if (first)
+                foreach (var element in elements)
                 {
-                    first = false;
-                }
-                else
-                {
-                    writer.Write(separator);
-                }
+                    if (first)
+                    {
+                        first = false;
+                    }
+                    else
+                    {
+                        writer.Write(separator);
+                    }
 
-                element.ToCss(writer, this);
+                    element.ToCss(writer, this);
+                }
             }
         }
     }

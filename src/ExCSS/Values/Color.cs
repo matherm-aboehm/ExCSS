@@ -21,42 +21,42 @@ namespace ExCSS
         /// <summary>
         ///      #000000.
         /// </summary>
-        public static readonly Color Black = new(0, 0, 0);
+        public static readonly Color Black = new Color(0, 0, 0);
 
         /// <summary>
         ///      #FFFFFF.
         /// </summary>
-        public static readonly Color White = new(255, 255, 255);
+        public static readonly Color White = new Color(255, 255, 255);
 
         /// <summary>
         ///      #FF0000.
         /// </summary>
-        public static readonly Color Red = new(255, 0, 0);
+        public static readonly Color Red = new Color(255, 0, 0);
 
         /// <summary>
         ///      #FF00FF.
         /// </summary>
-        public static readonly Color Magenta = new(255, 0, 255);
+        public static readonly Color Magenta = new Color(255, 0, 255);
 
         /// <summary>
         ///      #008000.
         /// </summary>
-        public static readonly Color Green = new(0, 128, 0);
+        public static readonly Color Green = new Color(0, 128, 0);
 
         /// <summary>
         ///      #00FF00.
         /// </summary>
-        public static readonly Color PureGreen = new(0, 255, 0);
+        public static readonly Color PureGreen = new Color(0, 255, 0);
 
         /// <summary>
         ///      #0000FF.
         /// </summary>
-        public static readonly Color Blue = new(0, 0, 255);
+        public static readonly Color Blue = new Color(0, 0, 255);
 
         /// <summary>
         ///      #00000000.
         /// </summary>
-        public static readonly Color Transparent = new(0, 0, 0, 0);
+        public static readonly Color Transparent = new Color(0, 0, 0, 0);
 
         #endregion
 
@@ -80,17 +80,17 @@ namespace ExCSS
 
         public static Color FromRgba(byte red, byte green, byte blue, float alpha)
         {
-            return new(red, green, blue, Normalize(alpha));
+            return new Color(red, green, blue, Normalize(alpha));
         }
 
         public static Color FromRgba(float red, float green, float blue, float alpha)
         {
-            return new(Normalize(red), Normalize(green), Normalize(blue), Normalize(alpha));
+            return new Color(Normalize(red), Normalize(green), Normalize(blue), Normalize(alpha));
         }
 
         public static Color FromGray(byte number, float alpha = 1f)
         {
-            return new(number, number, number, Normalize(alpha));
+            return new Color(number, number, number, Normalize(alpha));
         }
 
         public static Color FromGray(float value, float alpha = 1f)
@@ -105,7 +105,7 @@ namespace ExCSS
 
         public static Color FromRgb(byte red, byte green, byte blue)
         {
-            return new(red, green, blue);
+            return new Color(red, green, blue);
         }
 
         public static Color FromHex(string color)
@@ -132,7 +132,7 @@ namespace ExCSS
                     break;
             }
 
-            return new Color((byte) r, (byte) g, (byte) b, (byte) a);
+            return new Color((byte)r, (byte)g, (byte)b, (byte)a);
         }
 
         public static bool TryFromHex(string color, out Color value)
@@ -173,14 +173,14 @@ namespace ExCSS
                 var r = chars[0 * n + s].FromHex();
                 var g = chars[1 * n + s].FromHex();
                 var b = chars[2 * n + s].FromHex();
-                return new Color((byte) r, (byte) g, (byte) b);
+                return new Color((byte)r, (byte)g, (byte)b);
             }
             else
             {
                 var r = 16 * chars[0 * n + s].FromHex() + chars[0 * n + s + 1].FromHex();
                 var g = 16 * chars[1 * n + s].FromHex() + chars[1 * n + s + 1].FromHex();
                 var b = 16 * chars[2 * n + s].FromHex() + chars[2 * n + s + 1].FromHex();
-                return new Color((byte) r, (byte) g, (byte) b);
+                return new Color((byte)r, (byte)g, (byte)b);
             }
         }
 
@@ -218,7 +218,7 @@ namespace ExCSS
                 blackness *= ratio;
             }
 
-            var p = (int) (6 * hue);
+            var p = (int)(6 * hue);
             var f = 6 * hue - p;
 
             if ((p & 0x01) != 0) f = 1 - f;
@@ -320,17 +320,17 @@ namespace ExCSS
             var r = gamma * below.R + alpha * above.R;
             var g = gamma * below.G + alpha * above.G;
             var b = gamma * below.B + alpha * above.B;
-            return new Color((byte) r, (byte) g, (byte) b);
+            return new Color((byte)r, (byte)g, (byte)b);
         }
 
         private static byte Normalize(float value)
         {
-            return (byte) Math.Max(Math.Min(Math.Round(255 * value), 255), 0);
+            return (byte)Math.Max(Math.Min(Math.Round(255 * value), 255), 0);
         }
 
         private static byte Convert(float value)
         {
-            return (byte) Math.Round(255f * value);
+            return (byte)Math.Round(255f * value);
         }
 
         private static float HueToRgb(float m1, float m2, float h)

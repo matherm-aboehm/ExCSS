@@ -923,67 +923,67 @@ namespace ExCSS
 
         private Token NewMatch(string match)
         {
-            return new(TokenType.Match, match, _position);
+            return new Token(TokenType.Match, match, _position);
         }
 
         private Token NewColumn()
         {
-            return new(TokenType.Column, Combinators.Column, _position);
+            return new Token(TokenType.Column, Combinators.Column, _position);
         }
 
         private Token NewCloseCurly()
         {
-            return new(TokenType.CurlyBracketClose, "}", _position);
+            return new Token(TokenType.CurlyBracketClose, "}", _position);
         }
 
         private Token NewOpenCurly()
         {
-            return new(TokenType.CurlyBracketOpen, "{", _position);
+            return new Token(TokenType.CurlyBracketOpen, "{", _position);
         }
 
         private Token NewCloseSquare()
         {
-            return new(TokenType.SquareBracketClose, "]", _position);
+            return new Token(TokenType.SquareBracketClose, "]", _position);
         }
 
         private Token NewOpenSquare()
         {
-            return new(TokenType.SquareBracketOpen, "[", _position);
+            return new Token(TokenType.SquareBracketOpen, "[", _position);
         }
 
         private Token NewOpenComment()
         {
-            return new(TokenType.Cdo, "<!--", _position);
+            return new Token(TokenType.Cdo, "<!--", _position);
         }
 
         private Token NewSemicolon()
         {
-            return new(TokenType.Semicolon, ";", _position);
+            return new Token(TokenType.Semicolon, ";", _position);
         }
 
         private Token NewColon()
         {
-            return new(TokenType.Colon, ":", _position);
+            return new Token(TokenType.Colon, ":", _position);
         }
 
         private Token NewCloseComment()
         {
-            return new(TokenType.Cdc, "-->", _position);
+            return new Token(TokenType.Cdc, "-->", _position);
         }
 
         private Token NewComma()
         {
-            return new(TokenType.Comma, ",", _position);
+            return new Token(TokenType.Comma, ",", _position);
         }
 
         private Token NewCloseRound()
         {
-            return new(TokenType.RoundBracketClose, ")", _position);
+            return new Token(TokenType.RoundBracketClose, ")", _position);
         }
 
         private Token NewOpenRound()
         {
-            return new(TokenType.RoundBracketOpen, "(", _position);
+            return new Token(TokenType.RoundBracketOpen, "(", _position);
         }
 
         private Token NewString(string value, char quote, bool bad = false)
@@ -1052,7 +1052,7 @@ namespace ExCSS
 
         private Token NewWhitespace(char character)
         {
-            return new(TokenType.Whitespace, character.ToString(), _position);
+            return new Token(TokenType.Whitespace, character.ToString(), _position);
         }
 
         private Token NewNumber(string number)
@@ -1062,7 +1062,7 @@ namespace ExCSS
 
         private Token NewDelimiter(char c)
         {
-            return new(TokenType.Delim, c.ToString(), _position);
+            return new Token(TokenType.Delim, c.ToString(), _position);
         }
 
         private Token NewColor(string text)
@@ -1072,7 +1072,7 @@ namespace ExCSS
 
         private Token NewEof()
         {
-            return new(TokenType.EndOfFile, string.Empty, _position);
+            return new Token(TokenType.EndOfFile, string.Empty, _position);
         }
 
         private Token NumberExponential(char letter)

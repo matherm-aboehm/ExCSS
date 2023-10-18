@@ -3,116 +3,117 @@ using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace ExCSS.Tests;
-
-public class AttrSelectorTests
+namespace ExCSS.Tests
 {
-    [Fact]
-    public async Task FindAllAttrMatchSelectorsThatMatchAttributeName()
+    public class AttrSelectorTests
     {
-        // Arrange
-        var sheet = await GetAttributeStylesheetAsync("");
+        [Fact]
+        public async Task FindAllAttrMatchSelectorsThatMatchAttributeName()
+        {
+            // Arrange
+            var sheet = await GetAttributeStylesheetAsync("");
 
-        // Act
-        var list = GetAttributeStyleRules<AttrMatchSelector>(sheet);
+            // Act
+            var list = GetAttributeStyleRules<AttrMatchSelector>(sheet);
 
-        // Assert
-        Assert.Equal(2, list.Count());
-    }
+            // Assert
+            Assert.Equal(2, list.Count());
+        }
 
-    [Fact]
-    public async Task FindAllAttrInListSelectorsThatMatchAttributeName()
-    {
-        // Arrange
-        var sheet = await GetAttributeStylesheetAsync("~");
+        [Fact]
+        public async Task FindAllAttrInListSelectorsThatMatchAttributeName()
+        {
+            // Arrange
+            var sheet = await GetAttributeStylesheetAsync("~");
 
-        // Act
-        var list = GetAttributeStyleRules<AttrListSelector>(sheet);
+            // Act
+            var list = GetAttributeStyleRules<AttrListSelector>(sheet);
 
-        // Assert
-        Assert.Equal(2, list.Count());
-    }
-    
-    [Fact]
-    public async Task FindAllAttrHyphenSelectorsThatMatchAttributeName()
-    {
-        // Arrange
-        var sheet = await GetAttributeStylesheetAsync("|");
+            // Assert
+            Assert.Equal(2, list.Count());
+        }
 
-        // Act
-        var list = GetAttributeStyleRules<AttrHyphenSelector>(sheet);
+        [Fact]
+        public async Task FindAllAttrHyphenSelectorsThatMatchAttributeName()
+        {
+            // Arrange
+            var sheet = await GetAttributeStylesheetAsync("|");
 
-        // Assert
-        Assert.Equal(2, list.Count());
-    }
-    
-    [Fact]
-    public async Task FindAllAttrBeginsSelectorsThatMatchAttributeName()
-    {
-        // Arrange
-        var sheet = await GetAttributeStylesheetAsync("^");
+            // Act
+            var list = GetAttributeStyleRules<AttrHyphenSelector>(sheet);
 
-        // Act
-        var list = GetAttributeStyleRules<AttrBeginsSelector>(sheet);
+            // Assert
+            Assert.Equal(2, list.Count());
+        }
 
-        // Assert
-        Assert.Equal(2, list.Count());
-    }
-    
-    [Fact]
-    public async Task FindAllAttrEndsSelectorsThatMatchAttributeName()
-    {
-        // Arrange
-        var sheet = await GetAttributeStylesheetAsync("$");
+        [Fact]
+        public async Task FindAllAttrBeginsSelectorsThatMatchAttributeName()
+        {
+            // Arrange
+            var sheet = await GetAttributeStylesheetAsync("^");
 
-        // Act
-        var list = GetAttributeStyleRules<AttrEndsSelector>(sheet);
+            // Act
+            var list = GetAttributeStyleRules<AttrBeginsSelector>(sheet);
 
-        // Assert
-        Assert.Equal(2, list.Count());
-    }
-    
-    [Fact]
-    public async Task FindAllAttrContainsSelectorsThatMatchAttributeName()
-    {
-        // Arrange
-        var sheet = await GetAttributeStylesheetAsync("*");
+            // Assert
+            Assert.Equal(2, list.Count());
+        }
 
-        // Act
-        var list = GetAttributeStyleRules<AttrContainsSelector>(sheet);
+        [Fact]
+        public async Task FindAllAttrEndsSelectorsThatMatchAttributeName()
+        {
+            // Arrange
+            var sheet = await GetAttributeStylesheetAsync("$");
 
-        // Assert
-        Assert.Equal(2, list.Count());
-    }
-    
-    [Fact]
-    public async Task FindAllAttrNotMatchSelectorsThatMatchAttributeName()
-    {
-        // Arrange
-        var sheet = await GetAttributeStylesheetAsync("!");
+            // Act
+            var list = GetAttributeStyleRules<AttrEndsSelector>(sheet);
 
-        // Act
-        var list = GetAttributeStyleRules<AttrNotMatchSelector>(sheet);
+            // Assert
+            Assert.Equal(2, list.Count());
+        }
 
-        // Assert
-        Assert.Equal(2, list.Count());
-    }
+        [Fact]
+        public async Task FindAllAttrContainsSelectorsThatMatchAttributeName()
+        {
+            // Arrange
+            var sheet = await GetAttributeStylesheetAsync("*");
 
-    private async Task<Stylesheet> GetAttributeStylesheetAsync(string combinator)
-    {
-        var css = @"[type" + combinator + "='button'] { background-color: #101010 } .sample-class[type"
-                  + combinator + "='input'] { background-color: #121212 }";
+            // Act
+            var list = GetAttributeStyleRules<AttrContainsSelector>(sheet);
 
-        return await new StylesheetParser().ParseAsync(css);
-    }
+            // Assert
+            Assert.Equal(2, list.Count());
+        }
 
-    private IEnumerable<IStyleRule> GetAttributeStyleRules<T>(Stylesheet sheet) where T : IAttrSelector
-    {
-        return sheet.StyleRules
-            .Where(x =>
-                (x.Selector is CompoundSelector selector &&
-                 selector.Any(y => y is T { Attribute: "type" }))
-                || x.Selector is T { Attribute: "type" }
+        [Fact]
+        public async Task FindAllAttrNotMatchSelectorsThatMatchAttributeName()
+        {
+            // Arrange
+            var sheet = await GetAttributeStylesheetAsync("!");
+
+            // Act
+            var list = GetAttributeStyleRules<AttrNotMatchSelector>(sheet);
+
+            // Assert
+            Assert.Equal(2, list.Count());
+        }
+
+        private async Task<Stylesheet> GetAttributeStylesheetAsync(string combinator)
+        {
+            var css = @"[type" + combinator + "='button'] { background-color: #101010 } .sample-class[type"
+                      + combinator + "='input'] { background-color: #121212 }";
+
+            return await new StylesheetParser().ParseAsync(css);
+        }
+
+        private IEnumerable<IStyleRule> GetAttributeStyleRules<T>(Stylesheet sheet) where T : IAttrSelector
+        {
+            return sheet.StyleRules
+                .Where(x =>
+                    (x.Selector is CompoundSelector selector &&
+                     selector.Any(y => y is T t2 && t2.Attribute == "type"))
+                || (x.Selector is T t && t.Attribute == "type")
             );
+        }
     }
 }

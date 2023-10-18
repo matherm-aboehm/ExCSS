@@ -17,13 +17,13 @@ namespace ExCSS
         {
             get
             {
-                return Type switch
+                switch (Type)
                 {
-                    Unit.Dpcm => UnitNames.Dpcm,
-                    Unit.Dpi => UnitNames.Dpi,
-                    Unit.Dppx => UnitNames.Dppx,
-                    _ => string.Empty
-                };
+                    case Unit.Dpcm: return UnitNames.Dpcm;
+                    case Unit.Dpi: return UnitNames.Dpi;
+                    case Unit.Dppx: return UnitNames.Dppx;
+                    default: return string.Empty;
+                }
             }
         }
 
@@ -43,13 +43,13 @@ namespace ExCSS
 
         public static Unit GetUnit(string s)
         {
-            return s switch
+            switch (s)
             {
-                "dpcm" => Unit.Dpcm,
-                "dpi" => Unit.Dpi,
-                "dppx" => Unit.Dppx,
-                _ => Unit.None
-            };
+                case "dpcm": return Unit.Dpcm;
+                case "dpi": return Unit.Dpi;
+                case "dppx": return Unit.Dppx;
+                default: return Unit.None;
+            }
         }
 
         public float ToDotsPerPixel()

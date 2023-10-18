@@ -10,37 +10,37 @@ namespace ExCSS
         /// <summary>
         ///     Gets a zero pixel length value.
         /// </summary>
-        public static readonly Length Zero = new(0f, Unit.Px);
+        public static readonly Length Zero = new Length(0f, Unit.Px);
 
         /// <summary>
         ///     Gets the half relative length, i.e. 50%.
         /// </summary>
-        public static readonly Length Half = new(50f, Unit.Percent);
+        public static readonly Length Half = new Length(50f, Unit.Percent);
 
         /// <summary>
         ///     Gets the full relative length, i.e. 100%.
         /// </summary>
-        public static readonly Length Full = new(100f, Unit.Percent);
+        public static readonly Length Full = new Length(100f, Unit.Percent);
 
         /// <summary>
         ///     Gets a thin length value.
         /// </summary>
-        public static readonly Length Thin = new(1f, Unit.Px);
+        public static readonly Length Thin = new Length(1f, Unit.Px);
 
         /// <summary>
         ///     Gets a medium length value.
         /// </summary>
-        public static readonly Length Medium = new(3f, Unit.Px);
+        public static readonly Length Medium = new Length(3f, Unit.Px);
 
         /// <summary>
         ///     Gets a thick length value.
         /// </summary>
-        public static readonly Length Thick = new(5f, Unit.Px);
+        public static readonly Length Thick = new Length(5f, Unit.Px);
 
         /// <summary>
         ///     Gets the missing value.
         /// </summary>
-        public static readonly Length Missing = new(-1f, Unit.Ch);
+        public static readonly Length Missing = new Length(-1f, Unit.Ch);
 
         public Length(float value, Unit unit)
         {

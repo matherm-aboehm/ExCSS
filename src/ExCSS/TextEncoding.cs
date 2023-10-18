@@ -9,7 +9,7 @@ namespace ExCSS
 {
     public static class TextEncoding
     {
-        public static HashSet<string> AvailableEncodings = new(from encoding in Encoding.GetEncodings()
+        public static HashSet<string> AvailableEncodings = new HashSet<string>(from encoding in Encoding.GetEncodings()
             select encoding.Name);
 
         public static readonly Encoding Utf8 = new UTF8Encoding(false);

@@ -7,7 +7,7 @@ namespace ExCSS
     public sealed class PseudoElementSelectorFactory
     {
         private static readonly Lazy<PseudoElementSelectorFactory> Lazy =
-            new(() => new PseudoElementSelectorFactory());
+            new Lazy<PseudoElementSelectorFactory>(() => new PseudoElementSelectorFactory());
 
         #region Selectors
 

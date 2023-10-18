@@ -1,7 +1,7 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net48</TargetFramework>
     <AssemblyName>ExCSS.Tests</AssemblyName>
     <PackageId>ExCSS.Tests</PackageId>
     <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
@@ -10,6 +10,7 @@
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>ExCSS.Tests.snk</AssemblyOriginatorKeyFile>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,9 +18,25 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.6.3" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.5.0" />
     <PackageReference Include="xunit" Version="2.5.0" />
+  </ItemGroup>
+  
+  <ItemGroup Condition="'$(VisualStudioVersion)' == '15.0'">
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.2" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(VisualStudioVersion)' == '16.0'">
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.5.0" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(VisualStudioVersion)' == '17.0'">
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.6.3" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.5.3" />
   </ItemGroup>
 
   <ItemGroup>

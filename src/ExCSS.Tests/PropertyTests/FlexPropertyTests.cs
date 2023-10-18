@@ -9,14 +9,13 @@ namespace ExCSS.Tests.PropertyTests
         [Fact]
         public void JustifyAlign_Parses()
         {
-            string css = """
-html {
+            string css =
+@"html {
     justify-content: center;
     align-items: center;
     align-content: center;
     align-self: center;
-}
-""";
+}";
             var stylesheet = new StylesheetParser().Parse(css);
 
             var info = stylesheet.StyleRules.First() as ExCSS.StyleRule;
@@ -30,11 +29,10 @@ html {
         [Fact]
         public void FlexAuto_Parses()
         {
-            string css = """
-html {
+            string css =
+@"html {
     flex: auto;
-}
-""";
+}";
 
             var stylesheet = new StylesheetParser().Parse(css);
             var info = stylesheet.StyleRules.First() as ExCSS.StyleRule;
