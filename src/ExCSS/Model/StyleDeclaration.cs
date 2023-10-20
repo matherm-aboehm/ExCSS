@@ -208,6 +208,7 @@ namespace ExCSS
 
         internal Property GetProperty(string name)
         {
+            name = PropertyFactory.Instance.GetNormalizedPropertyName(name);
             return Declarations.FirstOrDefault(m => m.Name.Isi(name));
         }
 

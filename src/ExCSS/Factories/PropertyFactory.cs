@@ -18,6 +18,8 @@ namespace ExCSS
 
         private readonly Dictionary<string, ShorthandCreator> _shorthands = new Dictionary<string, ShorthandCreator>(StringComparer.OrdinalIgnoreCase);
 
+        private readonly Dictionary<string, string> _aliases = new Dictionary<string, string>();
+
         private PropertyFactory()
         {
             AddLonghand(PropertyNames.AlignContent, () => new AlignContentProperty());
@@ -334,6 +336,8 @@ namespace ExCSS
             AddLonghand(PropertyNames.ObjectFit, () => new ObjectFitProperty());
             AddLonghand(PropertyNames.ObjectPosition, () => new ObjectPositionProperty(), true);
 
+            AddAlias(PropertyNames.WordWrap, PropertyNames.OverflowWrap);
+
             _fonts.Add(PropertyNames.Src, () => new SrcProperty());
             _fonts.Add(PropertyNames.UnicodeRange, () => new UnicodeRangeProperty());
         }
@@ -353,6 +357,11 @@ namespace ExCSS
             if (animatable) _animatables.Add(name);
 
             if (font) _fonts.Add(name, creator);
+        }
+
+        private void AddAlias(string oldName, string newName)
+        {
+            _aliases.Add(oldName, newName);
         }
 
         public Property Create(string name)
@@ -411,6 +420,11 @@ namespace ExCSS
         public IEnumerable<string> GetShorthands(string name)
         {
             return from mapping in _mappings where mapping.Value.Contains(name, StringComparison.OrdinalIgnoreCase) select mapping.Key;
+        }
+
+        public string GetNormalizedPropertyName(string name)
+        {
+            return _aliases.TryGetValue(name, out var newName) ? newName : name;
         }
 
         private delegate Property LonghandCreator();
