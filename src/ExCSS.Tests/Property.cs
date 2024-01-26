@@ -2,7 +2,7 @@
 {
     using ExCSS;
     using Xunit;
-    
+
     public class CssPropertyTests : CssConstructionFunctions
     {
         [Fact]
@@ -1285,22 +1285,30 @@
             var color = decl.CreateProperty("color");
             decl.SetProperty(color);
             var colorAgain = decl.CreateProperty("color");
+            var wordWrap = decl.CreateProperty("word-wrap");
+            decl.SetProperty(wordWrap);
+            var wordWrapAgain = decl.CreateProperty("word-wrap");
 
             Assert.Null(invalid);
             Assert.NotNull(border);
             Assert.NotNull(color);
             Assert.NotNull(colorAgain);
+            Assert.NotNull(wordWrap);
+            Assert.NotNull(wordWrapAgain);
 
             Assert.IsType<BorderProperty>(border);
             Assert.IsType<ColorProperty>(color);
-            Assert.Equal(color, colorAgain);
+            Assert.IsType<OverflowWrapProperty>(wordWrap);
+            Assert.Same(color, colorAgain);
+            Assert.Same(wordWrap, wordWrapAgain);
+            Assert.NotEqual("", decl.OverflowWrap);
         }
 
         [Fact]
         public void CssUnknownPropertyPreservesCase()
         {
             var snippet = "my-Property: something";
-            var property = ParseDeclaration(snippet, includeUnknownDeclarations:true);
+            var property = ParseDeclaration(snippet, includeUnknownDeclarations: true);
             Assert.Equal("my-Property", property.Name);
             Assert.IsType<UnknownProperty>(property);
         }
